@@ -6,6 +6,7 @@ import voluptuous as vol
 
 from homeassistant.components.media_player import PLATFORM_SCHEMA, MediaPlayerEntity
 from homeassistant.components.media_player.const import (
+    MEDIA_TYPE_MUSIC,
     SUPPORT_SELECT_SOURCE,
     SUPPORT_TURN_OFF,
     SUPPORT_TURN_ON,
@@ -118,6 +119,11 @@ class NAD(MediaPlayerEntity):
         self._reverse_mapping = {value: key for key, value in self._source_dict.items()}
 
         self._volume = self._state = self._mute = self._source = None
+
+    @property
+    def media_content_type(self) -> str:
+        """Content type of current playing media."""
+        return MEDIA_TYPE_MUSIC
 
     @property
     def name(self):
